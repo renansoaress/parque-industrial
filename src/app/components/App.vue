@@ -186,8 +186,11 @@
         },
         methods: {
             setPage(page){
-                if(page === "status")
+                if(page === "status"){
                     this.getStatus();
+                    this.edit = false;
+                    this.form = false;
+                }
                 else if(page === "simulador"){
                     this.edit = true;
                     this.form = true;
