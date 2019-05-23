@@ -3,9 +3,13 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 const app = express();
-mongoose.connect('mongodb://localhost/parque_industrial')
+mongoose.connect('mongodb://parqueindustri01:01020304@mongo71-farm76.kinghost.net/parqueindustri01', { useNewUrlParser: true })
     .then(db => console.log('DB is connected'))
     .catch(err => console.error(err));
+
+/*mongoose.connect('mongodb://localhost/parque_industrial')
+    .then(db => console.log('DB is connected'))
+    .catch(err => console.error(err));*/
 
 // Settings
 app.set('port', process.env.PORT || 3000);

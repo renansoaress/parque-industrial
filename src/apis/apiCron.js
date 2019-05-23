@@ -7,7 +7,7 @@ const Status = require('../models/Status');
 
 const cron = require("node-cron");
 
-let cronConfig = fs.readFileSync('src/cron.config', 'utf8')+""
+let cronConfig = fs.readFileSync(__dirname+'/../cron.config', 'utf8')+""
 cronConfig = cronConfig.split(":")
 let seconds = cronConfig[1] === "00" ? '' : "/"+cronConfig[1]
 let minutes = cronConfig[0] === "00" ? '' : "/"+cronConfig[0]
@@ -29,7 +29,7 @@ let timeCron = new cron.schedule("*"+seconds+" *"+minutes+" * * * *", async () =
 
 router.get('/', async (req, res) => {
     try {
-        await fs.readFile('src/cron.config', 'utf8', function(err, data) {  
+        await fs.readFile(__dirname+'/../cron.config', 'utf8', function(err, data) {  
             if (err) throw err;
             res.json({"tempo":data});
         });
@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
 router.put('/', async (req, res) => {
     try {
         timeCron.stop()
-        await fs.writeFile('src/cron.config', req.body.tempo, function(err) {
+        await fs.writeFile(__dirname+'/../cron.config', req.body.tempo, function(err) {
             if(err){
                 throw err
             }
